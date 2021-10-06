@@ -1,0 +1,26 @@
+<aura:component controller="ED_AccountController" implements="flexipage:availableForAllPageTypes" access="global" >
+	<!-- Attributes -->
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="accts" type="Object[]" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="acctId" type="String" />
+        
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler event="c:ED_SendAccountId" action="{!c.highlightAcct}" />
+    
+    
+        
+    <lightning:card variant="Narrow" title="Related Accounts" iconName="standard:account">
+        
+        <p class="slds-p-horizontal_small">
+            <div  style="height: 250px">
+                <lightning:datatable columns="{!v.columns}"
+                                     data="{!v.accts}"
+                                     keyField="id"
+                                     hideCheckboxColumn="true"/>
+            </div>
+
+        </p>
+    </lightning:card>
+</aura:component>

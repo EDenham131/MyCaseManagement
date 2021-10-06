@@ -1,0 +1,8 @@
+.THIS .highlightRowClass {
+    background-color: yellow;
+    color: red;
+}
+.THIS .rowClass {
+    background-color: white;
+    color: black;
+}

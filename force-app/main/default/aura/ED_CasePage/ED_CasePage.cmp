@@ -1,0 +1,28 @@
+<aura:component controller="ED_CaseController" implements="flexipage:availableForAllPageTypes" access="global" >
+	<!-- Attributes -->
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="selected" type="String" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="cases" type="Case[]" />
+    
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+	<!-- Events -->
+    <aura:registerEvent name="aidEvent" type="c:ED_SendAccountId" />
+    <aura:registerEvent name="cidEvent" type="c:ED_SendContactId" />
+    
+    
+    <lightning:card variant="Narrow"  iconName="standard:case">
+        <aura:set attribute="title">My Cases          <lightning:buttonIcon iconName="utility:download" onclick="{!c.downloadCasesToCsv }" alternativeText="Export Cases to CSV" />
+        </aura:set>
+        <div style="height: 600px">
+            <lightning:datatable columns="{!v.columns}"
+                                 data="{!v.cases}"
+                                 keyField="id"
+                                 onrowselection="{! c.selectRow}" 
+                                 maxRowSelection="1"
+                                 onrowaction="{! c.handleRowAction}" />
+        </div>
+    </lightning:card>
+</aura:component>

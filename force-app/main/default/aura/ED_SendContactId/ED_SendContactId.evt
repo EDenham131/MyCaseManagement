@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Send Contact ID information" >
+    <aura:attribute name="contactId" type="String" />
+</aura:event>
