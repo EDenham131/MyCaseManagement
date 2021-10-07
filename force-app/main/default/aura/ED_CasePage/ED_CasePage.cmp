@@ -7,11 +7,11 @@
     
     <!-- Handlers -->
     <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler  event="force:showToast" action="{!c.handleSuccess}" />
 
 	<!-- Events -->
     <aura:registerEvent name="aidEvent" type="c:ED_SendAccountId" />
     <aura:registerEvent name="cidEvent" type="c:ED_SendContactId" />
-    
     
     <lightning:card variant="Narrow"  iconName="standard:case">
         <aura:set attribute="title">My Cases          <lightning:buttonIcon iconName="utility:download" onclick="{!c.downloadCasesToCsv }" alternativeText="Export Cases to CSV" />
@@ -22,7 +22,7 @@
                                  keyField="id"
                                  onrowselection="{! c.selectRow}" 
                                  maxRowSelection="1"
-                                 onrowaction="{! c.handleRowAction}" />
+                                 onrowaction="{! c.editCase}" />
         </div>
     </lightning:card>
 </aura:component>

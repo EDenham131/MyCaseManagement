@@ -8,20 +8,12 @@
         ];
         
         cmp.set('v.columns', [
-            {label: 'Case Number', 
-             fieldName: 'URL',
-             type: 'url', 
-             typeAttributes: { 
-                 label: {
-                     fieldName: 'CaseNumber'
-                 },
-                 target: '_blank'
-             }},
+            {label: 'Case Number', fieldName: 'CaseNumber', type: 'text' },
             {label: 'Open Date', fieldName: 'CreatedDate', type: 'date'},
             {label: 'Origin', fieldName: 'Origin', type: 'text'},
             {label: 'Reason', fieldName: 'Reason', type: 'text'},
             {label: 'Status', fieldName: 'Status', type: 'text'},
-           // {type: 'action', typeAttributes: {rowActions: actions}}
+            {label: 'Action', type: 'button', typeAttributes: { label: 'Edit Case' }}
         ]);
         
         helper.fetchData(cmp);
@@ -30,19 +22,7 @@
         
     },
     
-    
-    handleRowAction: function (cmp, event, helper) {
-        var action = event.getParam('action');
-        var row = event.getParam('row');
-        
-        switch (action.name) {
-             case 'edit':
-     			 	
-                 break;
 
-         }
-    },
-    
     selectRow: function(cmp, event) {
         var selectedRows = event.getParam('selectedRows');
 		
@@ -77,4 +57,28 @@
         hiddenElement.click(); // using click() js function to download csv file
     },
 
+    editCase : function(cmp, event, helper) {
+
+        var row = event.getParam('row');
+        
+        var editRecordEvent = $A.get("e.force:editRecord");
+        
+        editRecordEvent.setParams({
+        
+        "recordId": row.Id
+        
+        });
+
+        editRecordEvent.fire();
+
+    },
+
+    handleSuccess : function (cmp, event, helper) {
+
+        // Refresh the view
+        // after data is updated
+        $A.get('e.force:refreshView').fire();
+
+
+    }
 })

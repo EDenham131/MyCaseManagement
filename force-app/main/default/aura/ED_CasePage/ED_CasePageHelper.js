@@ -9,9 +9,7 @@
             var state = results.getState();
             if (state === "SUCCESS") {
                 var cases = results.getReturnValue();
-                cases.forEach(function(item) {
-                    item['URL'] = '/lightning/r/Case/' + item['Id'] + '/edit';
-                });
+
                 cmp.set("v.cases", cases);
             }
         });
